@@ -17,19 +17,19 @@ type Actions interface {
 
 func (snl *SnakesAndLadders) move() {
 	dice := snl.roll()
-	loc := snl.game.locations[snl.turn]
-	for dice+loc > snl.game.board.size {
+	loc := snl.game.Locations[snl.turn]
+	for dice+loc > snl.game.Board.Size {
 		dice = snl.roll()
 	}
-	if dice+loc == snl.game.board.size {
+	if dice+loc == snl.game.Board.Size {
 		snl.finished = true
 	}
 	nx := dice + loc
 	fmt.Printf("moving from %d to %d\n", loc, nx)
-	if v, ok := snl.game.board.moves[nx]; ok {
+	if v, ok := snl.game.Board.Moves[nx]; ok {
 		fmt.Printf("moving from %d to %d\n", nx, v)
 		nx = v
 	}
-	snl.game.locations[snl.turn] = nx
-	snl.turn = (snl.turn + 1) % len(snl.game.players)
+	snl.game.Locations[snl.turn] = nx
+	snl.turn = (snl.turn + 1) % len(snl.game.Players)
 }
